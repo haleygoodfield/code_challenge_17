@@ -39,15 +39,46 @@ class SalesRep{ // Create the SalesRep class
         return client ? client.getTotalSpent() : 0; // returns the total spent 
     }
 }
-const ClientName = newSalesRep.clients.map(client => client.name);
 
 // Log: Sales rep’s clients and total spent for a specific client.
 const newSalesRep = new SalesRep(); // create a new SalesRep
 newSalesRep.name = 'Marie'; // assign name
 newSalesRep.addClient(newCustomer);
+
+const ClientName = newSalesRep.clients.map(client => client.name);
+
 console.log(`Sales Rep: ${newSalesRep.name}`)
 console.log(`Sales Rep Clients: ${ClientName}`)
-console.log(`Total Spent by Client: ${newSalesRep.getClientTotal('Noelle')}`);
+console.log(`Total Spent by Client: $${newSalesRep.getClientTotal('Noelle')}`);
+
+
+// Task 3: Create a VIPCustomer Class (extends Customer)
+class VIPCustomer extends Customer { // creates VIPCustomer Class that extends Customer
+    vipLevel = ''; // vipLevel (string: 'Gold', 'Platinum')
+
+    getTotalSpent() { // create override method: getTotalSpent() 
+        const totalSpent = this.purchaseHistory.reduce((total, amount) => total + amount, 0);
+        return totalSpentotalSpent * 1.10; //  returns total spent with 10% loyalty bonus added
+    }
+}
+
+// Log: VIP customer's total spent with bonus.
+const newVIPCustomer = new VIPCustomer(); // create a VIP Customer
+newVIPCustomer.name = 'Rose'; // assign name
+newVIPCustomer.email = 'rose@roadrunner.com'; // assign email
+newVIPCustomer.vipLevel = 'Platinum'; // Platinum VIP level
+newVIPCustomer.addPurchase(300); // add $300 purchase
+newVIPCustomer.addPurchase(350); // add $350 purchase
+
+console.log(`VIP Customer Name: ${newVIPCustomer.name}`)
+console.log(`VIP Customer Email: ${newVIPCustomer.email}`)
+console.log(`VIP Customer Level: ${newVIPCustomer.vipLevel}`)
+console.log(`Total Spent with Loyalty Bonus: $${newVIPCustomer.getTotalSpent()}`);
+
+
+
+
+
 
 
 

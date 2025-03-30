@@ -1,5 +1,4 @@
 // Task 1: Create a Customer Class
-
 class Customer { // Create the customer class  
     name = ''; // name (string)
     email = ''; // email (string)
@@ -47,9 +46,9 @@ newSalesRep.addClient(newCustomer);
 
 const ClientName = newSalesRep.clients.map(client => client.name);
 
-console.log(`Sales Rep: ${newSalesRep.name}`)
-console.log(`Sales Rep Clients: ${ClientName}`)
-console.log(`Total Spent by Client: $${newSalesRep.getClientTotal('Noelle')}`);
+console.log(`Sales Rep: ${newSalesRep.name}`) // Log Sales Rep
+console.log(`Sales Rep Clients: ${ClientName}`) // Log Sales Rep's clients
+console.log(`Total Spent by Client: $${newSalesRep.getClientTotal('Noelle')}`); // Logs total spent for a specific client
 
 
 // Task 3: Create a VIPCustomer Class (extends Customer)
@@ -58,7 +57,7 @@ class VIPCustomer extends Customer { // creates VIPCustomer Class that extends C
 
     getTotalSpent() { // create override method: getTotalSpent() 
         const totalSpent = this.purchaseHistory.reduce((total, amount) => total + amount, 0);
-        return totalSpentotalSpent * 1.10; //  returns total spent with 10% loyalty bonus added
+        return totalSpent * 1.10; //  returns total spent with 10% loyalty bonus added
     }
 }
 
@@ -70,10 +69,54 @@ newVIPCustomer.vipLevel = 'Platinum'; // Platinum VIP level
 newVIPCustomer.addPurchase(300); // add $300 purchase
 newVIPCustomer.addPurchase(350); // add $350 purchase
 
-console.log(`VIP Customer Name: ${newVIPCustomer.name}`)
-console.log(`VIP Customer Email: ${newVIPCustomer.email}`)
-console.log(`VIP Customer Level: ${newVIPCustomer.vipLevel}`)
-console.log(`Total Spent with Loyalty Bonus: $${newVIPCustomer.getTotalSpent()}`);
+console.log(`VIP Customer Name: ${newVIPCustomer.name}`) // Log customer's name
+console.log(`VIP Customer Email: ${newVIPCustomer.email}`)  // Log customer's email
+console.log(`VIP Customer Level: ${newVIPCustomer.vipLevel}`)  // Log customer's VIP Level
+console.log(`Total Spent with Loyalty Bonus: $${newVIPCustomer.getTotalSpent()}`); // Log VIP customer's total spent with bonus
+
+// Task 4: Build a Client Report System
+
+// Creating new Customers 
+const newCustomer2 = new Customer ();
+newCustomer2.name = 'Axel';
+newCustomer2.email = 'axel@gmail.com';
+newCustomer2.addPurchase(470);
+
+const newCustomer3 = new Customer ();
+newCustomer3.name = 'Kenny';
+newCustomer3.email = 'kenny@icloud.com';
+newCustomer3.addPurchase(520);
+
+// Store multiple customers (regular + VIP) and a sales rep
+const allCustomers = [newCustomer, newCustomer2, newCustomer3, newVIPCustomer];
+
+// Use .reduce() to calculate total revenue from all customers
+const totalRevenue = allCustomers.reduce(function (sum, customer) {
+    return sum + customer.getTotalSpent();
+}, 0);
+
+// Use .filter() to find customers who spent over $500.
+const highSpending = allCustomers.filter(function (customer) {
+    return customer.getTotalSpent() > 500;
+})
+
+// Creates the list of names of customers who spend >$500
+const highSpenders = highSpending.map(function (customer) {
+    return customer.name;
+})
+
+// Use .map() to create an array of customer names and total spent
+const customerSummary = allCustomers.map(function (customer) {
+    return {
+        name: customer.name,
+        total: `$${customer.getTotalSpent().toFixed(2)}`
+    };
+});
+
+console.log(`Total Revenue: $${totalRevenue.toFixed(2)}`); // Log Total revenue
+console.log(`High Spending Customers: ${highSpenders}`); // Log High-spending customers
+console.log('Customer Summary:', customerSummary); // Log Customer summary
+
 
 
 

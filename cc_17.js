@@ -72,7 +72,7 @@ newVIPCustomer.addPurchase(350); // add $350 purchase
 console.log(`VIP Customer Name: ${newVIPCustomer.name}`) // Log customer's name
 console.log(`VIP Customer Email: ${newVIPCustomer.email}`)  // Log customer's email
 console.log(`VIP Customer Level: ${newVIPCustomer.vipLevel}`)  // Log customer's VIP Level
-console.log(`Total Spent with Loyalty Bonus: $${newVIPCustomer.getTotalSpent()}`); // Log VIP customer's total spent with bonus
+console.log(`${newVIPCustomer.name}'s Total Spent with Loyalty Bonus: $${newVIPCustomer.getTotalSpent().toFixed(2)}`); // Log VIP customer's total spent with bonus
 
 // Task 4: Build a Client Report System
 
